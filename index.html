@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supplier Registration · I WORK Center IA · BPOS LATAM</title>
+<title>Supplier Registration · BPOS LATAM</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- ✅ Uploadcare Widget -->
@@ -101,37 +101,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .select option{background:var(--card)}
 .textarea{resize:vertical;min-height:88px}
 
-/* ── Uploadcare custom skin ── */
+/* Uploadcare */
 .uc-field{display:flex;flex-direction:column;gap:8px}
 .uc-label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-60);display:flex;align-items:center;gap:6px}
 .uc-required{color:var(--error)}
 .uc-optional{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
 .uc-req-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2);color:#f87171;text-transform:uppercase;letter-spacing:.06em}
-
 .uc-box{border:1px dashed rgba(124,58,237,.3);border-radius:var(--r2);padding:18px 20px;background:rgba(124,58,237,.02);transition:border-color .2s,background .2s;display:flex;align-items:center;gap:14px}
 .uc-box:hover{border-color:var(--violet);background:rgba(124,58,237,.06)}
 .uc-icon{width:36px;height:36px;border-radius:8px;background:rgba(124,58,237,.12);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
 .uc-info{flex:1}
 .uc-title{font-size:13px;color:var(--text-90);font-weight:500;margin-bottom:2px}
 .uc-sub{font-size:11px;color:var(--text-30)}
-
-/* Override Uploadcare button */
-.uploadcare--widget__button{
-  background:rgba(124,58,237,.15) !important;
-  border:1px solid var(--border) !important;
-  color:var(--violet2) !important;
-  font-family:'DM Sans',sans-serif !important;
-  font-size:12px !important;
-  border-radius:var(--r) !important;
-  padding:8px 14px !important;
-  cursor:pointer !important;
-  transition:all .2s !important;
-  margin-top:8px !important;
-}
-.uploadcare--widget__button:hover{background:rgba(124,58,237,.3) !important;color:white !important}
+.uploadcare--widget__button{background:rgba(124,58,237,.15)!important;border:1px solid var(--border)!important;color:var(--violet2)!important;font-family:'DM Sans',sans-serif!important;font-size:12px!important;border-radius:var(--r)!important;padding:8px 14px!important;cursor:pointer!important;transition:all .2s!important;margin-top:8px!important}
+.uploadcare--widget__button:hover{background:rgba(124,58,237,.3)!important;color:white!important}
 .uploadcare--widget__file-name{font-size:11px;color:var(--success);margin-top:4px;font-family:'DM Mono',monospace}
-
-/* Status de archivos */
 .file-status{margin-top:6px;font-size:11px;font-family:'DM Mono',monospace;color:var(--text-30);min-height:18px;transition:color .3s}
 .file-status.uploading{color:var(--gold)}
 .file-status.done{color:var(--success)}
@@ -208,7 +192,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="hd-logos">
       <div class="logo-badge">
         <div class="logo-dot"></div>
-        <span class="logo-text">I WORK CENTER IA</span>
+        <span class="logo-text">BPOS LATAM</span>
       </div>
       <div class="logo-sep"></div>
       <span class="brand-name">BPOS LATAM</span>
@@ -232,8 +216,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="hero">
       <div class="hero-label">Administrative Process · Proceso Administrativo</div>
-      <h1 class="hero-h">Supplier Registration<br><em>I WORK Center IA</em></h1>
-      <p class="hero-sub">Complete este formulario para registrarse como proveedor oficial de <strong>BPOS SAS · I WORK Center IA</strong>. Tu información será procesada bajo la Ley 1581 de 2012.</p>
+      <h1 class="hero-h">Supplier Registration<br><em>BPOS LATAM</em></h1>
+      <p class="hero-sub">Complete este formulario para registrarse como proveedor oficial de <strong>BPOS SAS · BPOS LATAM</strong>. Tu información será procesada bajo la Ley 1581 de 2012.</p>
     </div>
 
     <div class="info-strip">
@@ -256,7 +240,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="prog-lbl" id="pl4">04 · Documentos</span>
     </div>
 
-    <!-- ══════ PAGE 1 ══════ -->
+    <!-- PAGE 1 -->
     <div class="form-page active" id="page1">
       <div class="section visible">
         <div class="section-hd">
@@ -365,7 +349,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="field col-full">
             <label>Productos / Servicios Específicos <span>*</span></label>
-            <textarea class="textarea" id="f-svcs" placeholder="Lista los servicios o productos que ofrecerías a I WORK / BPOS LATAM…"></textarea>
+            <textarea class="textarea" id="f-svcs" placeholder="Lista los servicios o productos que ofrecerías a BPOS LATAM…"></textarea>
           </div>
         </div>
       </div>
@@ -376,7 +360,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <!-- ══════ PAGE 2 ══════ -->
+    <!-- PAGE 2 -->
     <div class="form-page" id="page2">
       <div class="section visible">
         <div class="section-hd">
@@ -428,7 +412,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <!-- ══════ PAGE 3 ══════ -->
+    <!-- PAGE 3 -->
     <div class="form-page" id="page3">
       <div class="section visible">
         <div class="section-hd">
@@ -535,7 +519,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <!-- ══════ PAGE 4 ══════ -->
+    <!-- PAGE 4 -->
     <div class="form-page" id="page4">
       <div class="section visible">
         <div class="section-hd">
@@ -544,123 +528,68 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="section-title-en">Required Documents</span>
         </div>
 
-        <!-- Explicación -->
         <div style="margin-bottom:20px;padding:14px 18px;background:rgba(124,58,237,.06);border:1px solid var(--border);border-radius:var(--r2);font-size:12px;color:var(--text-60);line-height:1.7">
           📁 <strong style="color:var(--text-90)">Los documentos se suben directamente y sus enlaces llegan al correo admin@iworkcenter.work</strong><br>
           Haz clic en cada botón "Seleccionar archivo" para cargar el documento. Puedes subir PDF, JPG o PNG.
         </div>
 
         <div class="grid" style="gap:16px">
-
-          <!-- RUT -->
           <div class="uc-field">
-            <div class="uc-label">
-              📄 RUT — Registro Único Tributario
-              <span class="uc-req-badge">Requerido</span>
-            </div>
+            <div class="uc-label">📄 RUT — Registro Único Tributario <span class="uc-req-badge">Requerido</span></div>
             <div class="uc-box">
               <div class="uc-icon">📄</div>
               <div class="uc-info">
                 <div class="uc-title">Registro Único Tributario</div>
                 <div class="uc-sub">PDF · JPG · PNG · Máx 10MB</div>
-                <!-- Uploadcare widget oculto visualmente pero funcional -->
-                <input type="hidden"
-                  role="uploadcare-uploader"
-                  id="uc-rut"
-                  data-public-key="demopublickey"
-                  data-tabs="file"
-                  data-preview-step="true"
-                  data-effects="crop"
-                  data-images-only="false"
-                  data-input-accept-types="image/*,application/pdf"
-                  data-max-local-file-size="10000000"
-                />
+                <input type="hidden" role="uploadcare-uploader" id="uc-rut" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-effects="crop" data-images-only="false" data-input-accept-types="image/*,application/pdf" data-max-local-file-size="10000000"/>
               </div>
             </div>
             <div class="file-status" id="status-rut">— Ningún archivo seleccionado</div>
           </div>
 
-          <!-- CERT BANCARIA -->
           <div class="uc-field">
-            <div class="uc-label">
-              🏦 Certificación Bancaria
-              <span class="uc-req-badge">Requerido</span>
-            </div>
+            <div class="uc-label">🏦 Certificación Bancaria <span class="uc-req-badge">Requerido</span></div>
             <div class="uc-box">
               <div class="uc-icon">🏦</div>
               <div class="uc-info">
                 <div class="uc-title">Certificación Bancaria</div>
                 <div class="uc-sub">No mayor a 30 días · PDF · Máx 10MB</div>
-                <input type="hidden"
-                  role="uploadcare-uploader"
-                  id="uc-cert"
-                  data-public-key="demopublickey"
-                  data-tabs="file"
-                  data-preview-step="true"
-                  data-input-accept-types="image/*,application/pdf"
-                  data-max-local-file-size="10000000"
-                />
+                <input type="hidden" role="uploadcare-uploader" id="uc-cert" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-input-accept-types="image/*,application/pdf" data-max-local-file-size="10000000"/>
               </div>
             </div>
             <div class="file-status" id="status-cert">— Ningún archivo seleccionado</div>
           </div>
 
-          <!-- ESTADOS FINANCIEROS -->
           <div class="uc-field">
-            <div class="uc-label">
-              📊 Estados Financieros
-              <span class="uc-optional">Opcional</span>
-            </div>
+            <div class="uc-label">📊 Estados Financieros <span class="uc-optional">Opcional</span></div>
             <div class="uc-box">
               <div class="uc-icon">📊</div>
               <div class="uc-info">
                 <div class="uc-title">Estados Financieros (últimos 2 años)</div>
                 <div class="uc-sub">PDF · Excel · Máx 15MB</div>
-                <input type="hidden"
-                  role="uploadcare-uploader"
-                  id="uc-estados"
-                  data-public-key="demopublickey"
-                  data-tabs="file"
-                  data-preview-step="true"
-                  data-input-accept-types="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                  data-max-local-file-size="15000000"
-                />
+                <input type="hidden" role="uploadcare-uploader" id="uc-estados" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-input-accept-types="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" data-max-local-file-size="15000000"/>
               </div>
             </div>
             <div class="file-status" id="status-estados">— Ningún archivo seleccionado</div>
           </div>
 
-          <!-- PORTAFOLIO -->
           <div class="uc-field">
-            <div class="uc-label">
-              📎 Portafolio de Servicios
-              <span class="uc-optional">Opcional</span>
-            </div>
+            <div class="uc-label">📎 Portafolio de Servicios <span class="uc-optional">Opcional</span></div>
             <div class="uc-box">
               <div class="uc-icon">📎</div>
               <div class="uc-info">
                 <div class="uc-title">Brochure o Portafolio</div>
                 <div class="uc-sub">PDF · Máx 20MB</div>
-                <input type="hidden"
-                  role="uploadcare-uploader"
-                  id="uc-portafolio"
-                  data-public-key="demopublickey"
-                  data-tabs="file"
-                  data-preview-step="true"
-                  data-input-accept-types="application/pdf"
-                  data-max-local-file-size="20000000"
-                />
+                <input type="hidden" role="uploadcare-uploader" id="uc-portafolio" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-input-accept-types="application/pdf" data-max-local-file-size="20000000"/>
               </div>
             </div>
             <div class="file-status" id="status-portafolio">— Ningún archivo seleccionado</div>
           </div>
-
         </div>
       </div>
 
       <div class="divider"></div>
 
-      <!-- LEGAL -->
       <div class="section visible">
         <div class="section-hd">
           <span class="section-num">04b</span>
@@ -671,7 +600,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <label class="check-item">
             <input type="checkbox" id="c-datos">
             <div class="check-box"></div>
-            <span class="check-label"><strong>Autorización Tratamiento de Datos Personales.</strong> Autorizo a BPOS SAS · I WORK Center IA para recolectar, almacenar, usar y procesar mis datos de acuerdo con la <a href="#">Política de Privacidad</a> y la Ley 1581 de 2012.</span>
+            <span class="check-label"><strong>Autorización Tratamiento de Datos Personales.</strong> Autorizo a BPOS SAS · BPOS LATAM para recolectar, almacenar, usar y procesar mis datos de acuerdo con la <a href="#">Política de Privacidad</a> y la Ley 1581 de 2012.</span>
           </label>
           <label class="check-item">
             <input type="checkbox" id="c-terminos">
@@ -707,221 +636,152 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <button type="button" class="btn-back" onclick="goPage(3)">← Anterior</button>
         <div></div>
       </div>
-    </div><!-- /page4 -->
+    </div>
 
     <div class="form-footer">
       <div style="display:flex;align-items:center;gap:16px">
-        <span class="footer-brand">I WORK Center IA</span>
+        <span class="footer-brand">BPOS LATAM</span>
         <div class="footer-sep"></div>
         <span class="footer-brand">BPOS SAS · LATAM</span>
       </div>
       <div class="footer-legal">Formulario de uso interno. La información suministrada es confidencial y será usada exclusivamente para procesos administrativos y de pagos. Colombia · 2026.</div>
     </div>
 
-  </div><!-- /formWrap -->
-</div><!-- /wrap -->
+  </div>
+</div>
 
 <script>
-// ════════════════════════════════════════════════════════════
-//  ⚙️  CONFIGURACIÓN — REEMPLAZA ESTOS DOS VALORES
-// ════════════════════════════════════════════════════════════
 const UPLOADCARE_PUBLIC_KEY = '26dff079e44d8f9e1667';
 const FORMSPREE_ENDPOINT    = 'https://formspree.io/f/mjgarekr';
-// ════════════════════════════════════════════════════════════
 
-// ── Init ID y fecha ───────────────────────────────────────
 const pad = n => String(n).padStart(2,'0');
 const d = new Date();
 const regId = d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
 document.getElementById('docId').querySelector('span').textContent = regId;
 document.getElementById('docDate').textContent = d.toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'});
+document.querySelectorAll('[data-public-key]').forEach(el=>{ el.dataset.publicKey = UPLOADCARE_PUBLIC_KEY; });
 
-// Inyectar public key en los widgets
-document.querySelectorAll('[data-public-key]').forEach(el => {
-  el.dataset.publicKey = UPLOADCARE_PUBLIC_KEY;
-});
-
-// ── Toast ─────────────────────────────────────────────────
-function showToast(msg, type='error'){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast' + (type==='success' ? ' green' : '');
+function showToast(msg,type='error'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast'+(type==='success'?' green':'');
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 5000);
+  setTimeout(()=>t.classList.remove('show'),5000);
 }
 
-// ── Navegación ────────────────────────────────────────────
-let currentPage = 1;
-const totalPages = 4;
-window.goPage = (n) => {
+let currentPage=1;
+const totalPages=4;
+window.goPage=(n)=>{
   document.getElementById('page'+currentPage).classList.remove('active');
   for(let i=1;i<=totalPages;i++){
     document.getElementById('pb'+i).className='prog-step'+(i<n?' done':i===n?' active':'');
     document.getElementById('pl'+i).className='prog-lbl'+(i===n?' active':'');
   }
-  currentPage = n;
+  currentPage=n;
   document.getElementById('page'+n).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 };
 
-// ── Intersection observer ─────────────────────────────────
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:.1});
 document.querySelectorAll('.section').forEach(s=>io.observe(s));
 
-// ── Uploadcare: captura de URLs ───────────────────────────
-const fileLinks = { rut: null, cert: null, estados: null, portafolio: null };
-
+const fileLinks={rut:null,cert:null,estados:null,portafolio:null};
 function initUploadcare(){
-  const widgets = {
-    'uc-rut':        'rut',
-    'uc-cert':       'cert',
-    'uc-estados':    'estados',
-    'uc-portafolio': 'portafolio'
-  };
-
-  Object.entries(widgets).forEach(([id, key]) => {
-    const el = document.getElementById(id);
-    if(!el) return;
-    const widget = uploadcare.Widget(el);
-    const statusEl = document.getElementById('status-'+key);
-
-    widget.onChange(file => {
-      if(!file){ fileLinks[key]=null; return; }
-      statusEl.className = 'file-status uploading';
-      statusEl.textContent = '⏳ Subiendo archivo…';
-
-      file.promise().then(info => {
-        fileLinks[key] = info.cdnUrl;
-        statusEl.className = 'file-status done';
-        statusEl.textContent = '✅ ' + info.name + ' — listo';
-      }).fail(() => {
-        fileLinks[key] = null;
-        statusEl.className = 'file-status error';
-        statusEl.textContent = '❌ Error al subir. Intenta de nuevo.';
+  const widgets={'uc-rut':'rut','uc-cert':'cert','uc-estados':'estados','uc-portafolio':'portafolio'};
+  Object.entries(widgets).forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const widget=uploadcare.Widget(el);
+    const statusEl=document.getElementById('status-'+key);
+    widget.onChange(file=>{
+      if(!file){fileLinks[key]=null;return;}
+      statusEl.className='file-status uploading';
+      statusEl.textContent='⏳ Subiendo archivo…';
+      file.promise().then(info=>{
+        fileLinks[key]=info.cdnUrl;
+        statusEl.className='file-status done';
+        statusEl.textContent='✅ '+info.name+' — listo';
+      }).fail(()=>{
+        fileLinks[key]=null;
+        statusEl.className='file-status error';
+        statusEl.textContent='❌ Error al subir. Intenta de nuevo.';
       });
     });
   });
 }
+window.addEventListener('DOMContentLoaded',initUploadcare);
 
-// Iniciar Uploadcare cuando cargue la página
-window.addEventListener('DOMContentLoaded', initUploadcare);
-
-// ── Submit ────────────────────────────────────────────────
-window.submitForm = async () => {
-  // Validar checkboxes
-  const checks = ['c-datos','c-terminos','c-sagrilaft','c-veracidad'];
+window.submitForm=async()=>{
+  const checks=['c-datos','c-terminos','c-sagrilaft','c-veracidad'];
   if(!checks.every(id=>document.getElementById(id).checked)){
-    showToast('⚠️ Acepta todas las declaraciones legales para continuar.');
-    return;
+    showToast('⚠️ Acepta todas las declaraciones legales para continuar.');return;
   }
-
-  // Validar campos obligatorios
-  const razon = document.getElementById('f-razon').value.trim();
-  const nit   = document.getElementById('f-nit').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  if(!razon || !nit || !email){
-    showToast('⚠️ Completa Razón Social, NIT y Email corporativo.');
-    goPage(1); return;
-  }
-
-  // Validar documentos requeridos
-  if(!fileLinks.rut){
-    showToast('📄 El RUT es obligatorio. Por favor súbelo.');
-    goPage(4); return;
-  }
-  if(!fileLinks.cert){
-    showToast('🏦 La Certificación Bancaria es obligatoria. Por favor súbela.');
-    goPage(4); return;
-  }
-
-  // Verificar configuración
-  if(FORMSPREE_ENDPOINT.includes('XXXXXXXX')){
-    showToast('⚙️ Configura el endpoint de Formspree en el código.'); return;
-  }
-
-  // Loading
-  const btn = document.getElementById('btnSubmit');
-  btn.disabled = true;
-  btn.classList.add('loading');
-
-  // Construir payload completo
-  const payload = {
-    _subject: `[Proveedor] ${razon} · NIT ${nit} · ID ${regId}`,
-    _replyto: email,
-
-    '📋 ID Registro':        regId,
-    '📅 Fecha Envío':        new Date().toLocaleString('es-CO'),
-
-    // Empresa
-    '🏢 Razón Social':       razon,
-    '🔢 NIT':                nit,
-    '🏛 Tipo Empresa':       document.getElementById('f-tipo').value,
-    '🌎 País':               document.getElementById('f-pais').value,
-    '📍 Ciudad':             document.getElementById('f-ciudad').value,
-    '📑 Régimen Tributario': document.getElementById('f-regimen').value,
-    '🏠 Dirección':          document.getElementById('f-dir').value,
-    '📞 Teléfono Empresa':   document.getElementById('f-tel').value,
-    '🌐 Sitio Web':          document.getElementById('f-web').value,
-    '📝 Descripción':        document.getElementById('f-desc').value,
-    '🗂 Categoría':          document.getElementById('f-cat').value,
-    '🗺 Cobertura':          document.getElementById('f-cob').value,
-    '💼 Servicios':          document.getElementById('f-svcs').value,
-
-    // Contacto
-    '👤 Contacto':           document.getElementById('f-rep').value,
-    '💼 Cargo':              document.getElementById('f-cargo').value,
-    '✉️ Email Corporativo':  email,
-    '✉️ Email Facturación':  document.getElementById('f-opemail').value,
-    '📱 Teléfono Contacto':  document.getElementById('f-telrep').value,
-    '💬 WhatsApp':           document.getElementById('f-wa').value,
-    '📡 Comunicación Pref':  document.getElementById('f-comm').value,
-
-    // Bancario
-    '🏦 Banco':              document.getElementById('f-banco').value,
-    '💳 Tipo Cuenta':        document.getElementById('f-tipocta').value,
-    '🔢 Número Cuenta':      document.getElementById('f-numcta').value,
-    '👤 Titular':            document.getElementById('f-titular').value,
-    '🔢 NIT Titular':        document.getElementById('f-titularid').value,
-    '💱 Moneda':             document.getElementById('f-moneda').value,
-    '⏱ Plazo Pago':         document.getElementById('f-plazo').value,
-    '🧾 Tipo Facturación':   document.getElementById('f-factura').value,
-    '📊 Retención':          document.getElementById('f-rte').value,
-    '📌 Observaciones':      document.getElementById('f-obs').value,
-
-    // ✅ Documentos con links directos de descarga
-    '📄 RUT (link descarga)':          fileLinks.rut   || 'No subido',
-    '🏦 Cert Bancaria (link descarga)': fileLinks.cert  || 'No subido',
-    '📊 Estados Financieros (link)':   fileLinks.estados    || 'No adjuntado',
-    '📎 Portafolio (link)':            fileLinks.portafolio || 'No adjuntado',
+  const razon=document.getElementById('f-razon').value.trim();
+  const nit=document.getElementById('f-nit').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  if(!razon||!nit||!email){showToast('⚠️ Completa Razón Social, NIT y Email corporativo.');goPage(1);return;}
+  if(!fileLinks.rut){showToast('📄 El RUT es obligatorio. Por favor súbelo.');goPage(4);return;}
+  if(!fileLinks.cert){showToast('🏦 La Certificación Bancaria es obligatoria. Por favor súbela.');goPage(4);return;}
+  if(FORMSPREE_ENDPOINT.includes('XXXXXXXX')){showToast('⚙️ Configura el endpoint de Formspree en el código.');return;}
+  const btn=document.getElementById('btnSubmit');
+  btn.disabled=true;btn.classList.add('loading');
+  const payload={
+    _subject:`[Proveedor] ${razon} · NIT ${nit} · ID ${regId}`,
+    _replyto:email,
+    '📋 ID Registro':regId,
+    '📅 Fecha Envío':new Date().toLocaleString('es-CO'),
+    '🏢 Razón Social':razon,'🔢 NIT':nit,
+    '🏛 Tipo Empresa':document.getElementById('f-tipo').value,
+    '🌎 País':document.getElementById('f-pais').value,
+    '📍 Ciudad':document.getElementById('f-ciudad').value,
+    '📑 Régimen Tributario':document.getElementById('f-regimen').value,
+    '🏠 Dirección':document.getElementById('f-dir').value,
+    '📞 Teléfono Empresa':document.getElementById('f-tel').value,
+    '🌐 Sitio Web':document.getElementById('f-web').value,
+    '📝 Descripción':document.getElementById('f-desc').value,
+    '🗂 Categoría':document.getElementById('f-cat').value,
+    '🗺 Cobertura':document.getElementById('f-cob').value,
+    '💼 Servicios':document.getElementById('f-svcs').value,
+    '👤 Contacto':document.getElementById('f-rep').value,
+    '💼 Cargo':document.getElementById('f-cargo').value,
+    '✉️ Email Corporativo':email,
+    '✉️ Email Facturación':document.getElementById('f-opemail').value,
+    '📱 Teléfono Contacto':document.getElementById('f-telrep').value,
+    '💬 WhatsApp':document.getElementById('f-wa').value,
+    '📡 Comunicación Pref':document.getElementById('f-comm').value,
+    '🏦 Banco':document.getElementById('f-banco').value,
+    '💳 Tipo Cuenta':document.getElementById('f-tipocta').value,
+    '🔢 Número Cuenta':document.getElementById('f-numcta').value,
+    '👤 Titular':document.getElementById('f-titular').value,
+    '🔢 NIT Titular':document.getElementById('f-titularid').value,
+    '💱 Moneda':document.getElementById('f-moneda').value,
+    '⏱ Plazo Pago':document.getElementById('f-plazo').value,
+    '🧾 Tipo Facturación':document.getElementById('f-factura').value,
+    '📊 Retención':document.getElementById('f-rte').value,
+    '📌 Observaciones':document.getElementById('f-obs').value,
+    '📄 RUT (link descarga)':fileLinks.rut||'No subido',
+    '🏦 Cert Bancaria (link descarga)':fileLinks.cert||'No subido',
+    '📊 Estados Financieros (link)':fileLinks.estados||'No adjuntado',
+    '📎 Portafolio (link)':fileLinks.portafolio||'No adjuntado',
   };
-
-  try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const json = await res.json();
-
+  try{
+    const res=await fetch(FORMSPREE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+    const json=await res.json();
     if(res.ok){
-      document.getElementById('formWrap').style.display = 'none';
-      const ss = document.getElementById('successScreen');
+      document.getElementById('formWrap').style.display='none';
+      const ss=document.getElementById('successScreen');
       ss.classList.add('show');
-      document.getElementById('successId').textContent =
-        'ID de Registro: ' + regId + ' · ' + new Date().toLocaleDateString('es-CO');
+      document.getElementById('successId').textContent='ID de Registro: '+regId+' · '+new Date().toLocaleDateString('es-CO');
       window.scrollTo({top:0,behavior:'smooth'});
-    } else {
-      const errMsg = json.errors ? json.errors.map(e=>e.message).join(', ') : 'Error al enviar.';
-      showToast('❌ ' + errMsg);
-      btn.disabled = false;
-      btn.classList.remove('loading');
+    }else{
+      const errMsg=json.errors?json.errors.map(e=>e.message).join(', '):'Error al enviar.';
+      showToast('❌ '+errMsg);btn.disabled=false;btn.classList.remove('loading');
     }
-  } catch(err) {
+  }catch(err){
     showToast('❌ Sin conexión. Verifica tu internet e intenta de nuevo.');
-    btn.disabled = false;
-    btn.classList.remove('loading');
+    btn.disabled=false;btn.classList.remove('loading');
   }
 };
 </script>
