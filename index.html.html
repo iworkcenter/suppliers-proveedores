@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Registration · BPOS LATAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#05060a;--surface:#0c0d14;--card:#111220;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);--violet:#7c3aed;--violet2:#a78bfa;--gold:#c9a84c;--t90:rgba(255,255,255,.90);--t60:rgba(255,255,255,.60);--t30:rgba(255,255,255,.30);--t15:rgba(255,255,255,.10);--ok:#10b981;--err:#f43f5e;--r:6px;--r2:12px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--t90);min-height:100vh;overflow-x:hidden;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,58,237,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 85% 100%,rgba(124,58,237,.08) 0%,transparent 55%);pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 24px 80px}
+.hd{display:flex;align-items:center;justify-content:space-between;padding-bottom:32px;border-bottom:1px solid var(--border2);margin-bottom:48px}
+.hd-logos{display:flex;align-items:center;gap:24px}
+.logo-badge{display:flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--border);border-radius:var(--r);background:rgba(124,58,237,.06)}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--violet2);box-shadow:0 0 8px var(--violet);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.logo-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--violet2)}
+.logo-sep{width:1px;height:28px;background:var(--border2)}
+.brand-name{font-family:'DM Mono',monospace;font-size:10px;color:var(--t30);letter-spacing:.12em;text-transform:uppercase}
+.hd-right{text-align:right}
+.doc-id{font-family:'DM Mono',monospace;font-size:10px;color:var(--t30);letter-spacing:.08em}
+.doc-date{font-size:11px;color:var(--t30);margin-top:3px}
+.hero{margin-bottom:52px}
+.hero-label{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.hero-label::before{content:'';display:block;width:24px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;line-height:1.1;color:var(--t90);margin-bottom:8px}
+.hero-h em{font-style:italic;color:var(--violet2)}
+.hero-sub{font-size:13px;color:var(--t60);line-height:1.6;max-width:520px;margin-top:12px}
+.hero-sub strong{color:var(--t90);font-weight:500}
+.info-strip{display:flex;gap:32px;flex-wrap:wrap;padding:20px 24px;background:rgba(255,255,255,.02);border:1px solid var(--border2);border-radius:var(--r2);margin-bottom:40px}
+.info-item{display:flex;align-items:center;gap:10px}
+.info-ic{font-size:16px}
+.info-t{font-size:12px;color:var(--t60)}
+.info-t strong{display:block;color:var(--t90);font-weight:500;margin-bottom:1px}
+.status-bar{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--t30)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 2s infinite}
+.progress-bar{display:flex;gap:6px;margin-bottom:48px}
+.prog-step{flex:1;height:3px;border-radius:2px;background:var(--t15);transition:background .4s}
+.prog-step.active{background:var(--violet)}
+.prog-step.done{background:var(--violet2)}
+.prog-labels{display:flex;justify-content:space-between;margin-top:8px;margin-bottom:40px}
+.prog-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--t30);transition:color .4s}
+.prog-lbl.active{color:var(--violet2)}
+.section{margin-bottom:48px;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+.section.visible{opacity:1;transform:none}
+.section-hd{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border2)}
+.section-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--violet2);letter-spacing:.08em;background:rgba(124,58,237,.1);padding:3px 8px;border-radius:4px;border:1px solid var(--border)}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--t90)}
+.section-title-en{font-family:'DM Mono',monospace;font-size:10px;color:var(--t30);letter-spacing:.08em;text-transform:uppercase;margin-left:auto}
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:1fr 1fr}
+@media(max-width:640px){.grid-2{grid-template-columns:1fr}}
+.col-full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--t60)}
+.field label span{color:var(--err);margin-left:2px}
+.field-note{font-size:10px;color:var(--t30);margin-top:-2px}
+.input,.select,.textarea{background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:var(--r);padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--t90);transition:border-color .2s,background .2s,box-shadow .2s;outline:none;width:100%}
+.input::placeholder,.textarea::placeholder{color:var(--t30)}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--violet);background:rgba(124,58,237,.06);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(255,255,255,.4)' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+.select option{background:var(--card)}
+.textarea{resize:vertical;min-height:88px}
+
+/* UPLOAD NATIVO */
+.upload-field{display:flex;flex-direction:column;gap:8px}
+.upload-label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--t60);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge-req{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2);color:#f87171;text-transform:uppercase;letter-spacing:.06em}
+.badge-opt{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+.upload-zone{border:1.5px dashed rgba(124,58,237,.3);border-radius:var(--r2);padding:18px 20px;background:rgba(124,58,237,.02);display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s;user-select:none}
+.upload-zone:hover{border-color:var(--violet);background:rgba(124,58,237,.07)}
+.upload-zone.dragover{border-color:var(--violet2);background:rgba(124,58,237,.12)}
+.upload-zone.uz-ok{border-color:var(--ok);background:rgba(16,185,129,.04);border-style:solid}
+.upload-zone.uz-err{border-color:var(--err);background:rgba(244,63,94,.04)}
+.uz-icon{width:42px;height:42px;border-radius:10px;background:rgba(124,58,237,.12);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:all .2s}
+.upload-zone.uz-ok .uz-icon{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3)}
+.uz-body{flex:1;min-width:0}
+.uz-name{font-size:13px;font-weight:500;color:var(--t90);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uz-hint{font-size:11px;color:var(--t30)}
+.uz-bar-wrap{height:3px;background:var(--t15);border-radius:2px;margin-top:8px;overflow:hidden;display:none}
+.uz-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--violet),var(--violet2));width:0%;transition:width .25s}
+.uz-cta{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.15);border:1px solid var(--border);color:var(--violet2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;border-radius:var(--r);padding:8px 14px;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.uz-cta:hover{background:rgba(124,58,237,.3);color:#fff;border-color:var(--violet)}
+.upload-zone.uz-ok .uz-cta{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.3);color:var(--ok)}
+.file-input-hidden{display:none}
+.file-status{font-size:11px;font-family:'DM Mono',monospace;color:var(--t30);min-height:16px;transition:color .3s}
+.fs-ok{color:var(--ok)}
+.fs-err{color:var(--err)}
+.fs-busy{color:var(--gold)}
+
+.check-group{display:flex;flex-direction:column;gap:12px}
+.check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+.check-item input[type=checkbox]{display:none}
+.check-box{width:18px;height:18px;min-width:18px;border:1px solid var(--border2);border-radius:4px;margin-top:1px;background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.check-item input:checked~.check-box{background:var(--violet);border-color:var(--violet)}
+.check-box::after{content:'✓';font-size:11px;color:white;font-weight:700;opacity:0;transform:scale(.5);transition:all .2s}
+.check-item input:checked~.check-box::after{opacity:1;transform:scale(1)}
+.check-label{font-size:13px;color:var(--t60);line-height:1.5}
+.check-label a{color:var(--violet2);text-decoration:none}
+.check-label strong{color:var(--t90)}
+.cta-zone{padding:36px 32px;border:1px solid var(--border);border-radius:var(--r2);background:linear-gradient(135deg,rgba(124,58,237,.06) 0%,rgba(124,58,237,.02) 100%);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--t90);margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--t30);line-height:1.5}
+.btn-submit{display:inline-flex;align-items:center;gap:10px;background:var(--violet);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border-radius:var(--r);border:none;cursor:pointer;transition:all .25s;white-space:nowrap;box-shadow:0 4px 24px rgba(124,58,237,.3)}
+.btn-submit:hover{background:#6d28d9;box-shadow:0 6px 32px rgba(124,58,237,.5);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-arrow{font-size:18px;transition:transform .2s}
+.btn-submit:hover .btn-arrow{transform:translateX(4px)}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-submit.loading .spinner{display:block}
+.btn-submit.loading .btn-label,.btn-submit.loading .btn-arrow{display:none}
+.nav-btns{display:flex;align-items:center;justify-content:space-between;margin-top:32px;gap:16px}
+.btn-back{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--border2);color:var(--t60);font-family:'DM Sans',sans-serif;font-size:13px;padding:11px 20px;border-radius:var(--r);cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--t30);color:var(--t90)}
+.btn-next{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.15);border:1px solid var(--border);color:var(--violet2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:11px 20px;border-radius:var(--r);cursor:pointer;transition:all .2s}
+.btn-next:hover{background:rgba(124,58,237,.25);border-color:var(--violet);color:white}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a1a2e;border:1px solid rgba(244,63,94,.4);color:#f87171;font-size:13px;padding:12px 20px;border-radius:var(--r2);opacity:0;transition:all .3s;z-index:999;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.green{border-color:rgba(16,185,129,.4);color:var(--ok)}
+.success-screen{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;min-height:60vh}
+.success-screen.show{display:flex}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:24px;animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.success-h{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--t90);margin-bottom:12px}
+.success-sub{font-size:14px;color:var(--t60);max-width:440px;line-height:1.6}
+.success-id{margin-top:24px;font-family:'DM Mono',monospace;font-size:11px;color:var(--violet2);background:rgba(124,58,237,.08);border:1px solid var(--border);padding:8px 16px;border-radius:var(--r)}
+.form-footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t30)}
+.footer-sep{width:1px;height:14px;background:var(--border2)}
+.footer-legal{font-size:10px;color:var(--t30);text-align:right;max-width:360px;line-height:1.5}
+.divider{height:1px;background:var(--border2);margin:8px 0}
+.form-page{display:none}
+.form-page.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <div class="hd">
+    <div class="hd-logos">
+      <div class="logo-badge"><div class="logo-dot"></div><span class="logo-text">BPOS LATAM</span></div>
+      <div class="logo-sep"></div>
+      <span class="brand-name">BPOS LATAM</span>
+    </div>
+    <div class="hd-right">
+      <div class="doc-id" id="docId">FORM-SUP-<span></span></div>
+      <div class="doc-date" id="docDate"></div>
+    </div>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2 class="success-h">Registro Enviado con Éxito</h2>
+    <p class="success-sub">Tu perfil de proveedor y todos los documentos han sido recibidos en <strong>admin@iworkcenter.work</strong>. Te contactaremos en 2–3 días hábiles.</p>
+    <div class="success-id" id="successId"></div>
+  </div>
+
+  <div id="formWrap">
+    <div class="hero">
+      <div class="hero-label">Administrative Process · Proceso Administrativo</div>
+      <h1 class="hero-h">Supplier Registration<br><em>BPOS LATAM</em></h1>
+      <p class="hero-sub">Complete este formulario para registrarse como proveedor oficial de <strong>BPOS SAS · BPOS LATAM</strong>. Tu información será procesada bajo la Ley 1581 de 2012.</p>
+    </div>
+
+    <div class="info-strip">
+      <div class="info-item"><span class="info-ic">🔐</span><div class="info-t"><strong>Secure & Encrypted</strong>SSL / Datos cifrados</div></div>
+      <div class="info-item"><span class="info-ic">📋</span><div class="info-t"><strong>Legal Compliance</strong>Ley 1581 · SAGRILAFT</div></div>
+      <div class="info-item"><span class="info-ic">📁</span><div class="info-t"><strong>Documentos incluidos</strong>Llegan al correo admin</div></div>
+      <div class="info-item"><div class="status-bar"><div class="status-dot"></div><span>Sistema activo</span></div></div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="prog-step active" id="pb1"></div><div class="prog-step" id="pb2"></div>
+      <div class="prog-step" id="pb3"></div><div class="prog-step" id="pb4"></div>
+    </div>
+    <div class="prog-labels">
+      <span class="prog-lbl active" id="pl1">01 · Empresa</span>
+      <span class="prog-lbl" id="pl2">02 · Contacto</span>
+      <span class="prog-lbl" id="pl3">03 · Bancario</span>
+      <span class="prog-lbl" id="pl4">04 · Documentos</span>
+    </div>
+
+    <!-- PAGE 1 -->
+    <div class="form-page active" id="page1">
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">01</span><span class="section-title">Información de la Empresa</span><span class="section-title-en">Company Information</span></div>
+        <div class="grid grid-2">
+          <div class="field col-full"><label>Razón Social / Legal Company Name <span>*</span></label><input class="input" id="f-razon" type="text" placeholder="Nombre completo según RUT"></div>
+          <div class="field"><label>NIT / Tax ID <span>*</span></label><input class="input" id="f-nit" type="text" placeholder="000.000.000-0"><span class="field-note">Con dígito de verificación</span></div>
+          <div class="field"><label>Tipo de Empresa <span>*</span></label><select class="select" id="f-tipo"><option value="">Seleccionar…</option><option>SAS — Sociedad por Acciones Simplificada</option><option>LTDA — Sociedad Limitada</option><option>S.A. — Sociedad Anónima</option><option>Persona Natural</option><option>Cooperativa</option><option>Fundación / ONG</option><option>Entidad Extranjera</option></select></div>
+          <div class="field"><label>País <span>*</span></label><select class="select" id="f-pais"><option value="">Seleccionar…</option><option selected>Colombia</option><option>México</option><option>Ecuador</option><option>Perú</option><option>Argentina</option><option>Chile</option><option>España</option><option>Estados Unidos</option><option>Otro</option></select></div>
+          <div class="field"><label>Ciudad <span>*</span></label><input class="input" id="f-ciudad" type="text" placeholder="Bogotá"></div>
+          <div class="field"><label>Régimen Tributario</label><select class="select" id="f-regimen"><option value="">Seleccionar…</option><option>Responsable de IVA</option><option>No Responsable de IVA</option><option>Gran Contribuyente</option><option>Régimen Simple</option><option>Entidad sin ánimo de lucro</option></select></div>
+          <div class="field col-full"><label>Dirección Comercial <span>*</span></label><input class="input" id="f-dir" type="text" placeholder="Calle 123 # 45-67, Piso 3, Bogotá"></div>
+          <div class="field"><label>Teléfono Principal <span>*</span></label><input class="input" id="f-tel" type="tel" placeholder="+57 601 000 0000"></div>
+          <div class="field"><label>Sitio Web</label><input class="input" id="f-web" type="url" placeholder="https://empresa.com"></div>
+          <div class="field col-full"><label>Descripción de la Empresa <span>*</span></label><textarea class="textarea" id="f-desc" placeholder="Describe brevemente tu empresa, actividad económica principal y años de experiencia…"></textarea></div>
+        </div>
+      </div>
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">01b</span><span class="section-title">Servicios & Productos</span><span class="section-title-en">Services & Products</span></div>
+        <div class="grid grid-2">
+          <div class="field"><label>Categoría Principal <span>*</span></label><select class="select" id="f-cat"><option value="">Seleccionar…</option><option>Tecnología e Inteligencia Artificial</option><option>Consultoría y Estrategia</option><option>Marketing Digital</option><option>Diseño y Contenidos</option><option>Infraestructura y Logística</option><option>Legal y Compliance</option><option>RRHH y Talento</option><option>Financiero y Contable</option><option>Capacitación y Formación</option><option>Suministros y Equipos</option><option>Otro</option></select></div>
+          <div class="field"><label>Cobertura Geográfica</label><select class="select" id="f-cob"><option value="">Seleccionar…</option><option>Local — Ciudad</option><option>Nacional — Colombia</option><option>Regional — LATAM</option><option>Internacional</option></select></div>
+          <div class="field col-full"><label>Productos / Servicios Específicos <span>*</span></label><textarea class="textarea" id="f-svcs" placeholder="Lista los servicios o productos que ofrecerías a BPOS LATAM…"></textarea></div>
+        </div>
+      </div>
+      <div class="nav-btns"><div></div><button type="button" class="btn-next" onclick="goPage(2)">Continuar — Contacto <span class="btn-arrow">→</span></button></div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="form-page" id="page2">
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">02</span><span class="section-title">Contacto Comercial & Facturación</span><span class="section-title-en">Commercial & Billing Contact</span></div>
+        <div class="grid grid-2">
+          <div class="field"><label>Nombre del Contacto <span>*</span></label><input class="input" id="f-rep" type="text" placeholder="Nombres y Apellidos"></div>
+          <div class="field"><label>Cargo / Position <span>*</span></label><input class="input" id="f-cargo" type="text" placeholder="CEO, Gerente Comercial…"></div>
+          <div class="field"><label>Email Corporativo <span>*</span></label><input class="input" id="f-email" type="email" placeholder="nombre@empresa.com"></div>
+          <div class="field"><label>Email Facturación</label><input class="input" id="f-opemail" type="email" placeholder="facturacion@empresa.com"><span class="field-note">Si es diferente al email principal</span></div>
+          <div class="field"><label>Teléfono Directo <span>*</span></label><input class="input" id="f-telrep" type="tel" placeholder="+57 300 000 0000"></div>
+          <div class="field"><label>WhatsApp</label><input class="input" id="f-wa" type="tel" placeholder="+57 300 000 0000"><span class="field-note">Para notificaciones y comunicaciones</span></div>
+          <div class="field"><label>Preferencia de Comunicación</label><select class="select" id="f-comm"><option value="">Seleccionar…</option><option>Email</option><option>WhatsApp</option><option>Llamada telefónica</option><option>Reunión virtual (Meet/Teams)</option></select></div>
+        </div>
+      </div>
+      <div class="nav-btns"><button type="button" class="btn-back" onclick="goPage(1)">← Anterior</button><button type="button" class="btn-next" onclick="goPage(3)">Continuar — Bancario <span class="btn-arrow">→</span></button></div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="form-page" id="page3">
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">03</span><span class="section-title">Información Bancaria</span><span class="section-title-en">Banking Information</span></div>
+        <div class="grid grid-2">
+          <div class="field"><label>Banco <span>*</span></label><select class="select" id="f-banco"><option value="">Seleccionar…</option><option>Bancolombia</option><option>Banco de Bogotá</option><option>Davivienda</option><option>BBVA Colombia</option><option>Banco Popular</option><option>Colpatria / Scotiabank</option><option>AV Villas</option><option>Banco Agrario</option><option>Nequi</option><option>Daviplata</option><option>Nubank Colombia</option><option>Movii</option><option>Lulo Bank</option><option>Banco Internacional (exterior)</option><option>Otro</option></select></div>
+          <div class="field"><label>Tipo de Cuenta <span>*</span></label><select class="select" id="f-tipocta"><option value="">Seleccionar…</option><option>Cuenta Corriente</option><option>Cuenta de Ahorros</option><option>Cuenta Nómina</option><option>Billetera Digital</option></select></div>
+          <div class="field"><label>Número de Cuenta <span>*</span></label><input class="input" id="f-numcta" type="text" placeholder="0000000000000"></div>
+          <div class="field"><label>Titular de la Cuenta <span>*</span></label><input class="input" id="f-titular" type="text" placeholder="Razón social o nombre del titular"></div>
+          <div class="field"><label>NIT / Cédula del Titular <span>*</span></label><input class="input" id="f-titularid" type="text" placeholder="000.000.000-0"></div>
+          <div class="field"><label>Moneda Principal</label><select class="select" id="f-moneda"><option>COP — Peso Colombiano</option><option>USD — Dólar Americano</option><option>EUR — Euro</option></select></div>
+        </div>
+      </div>
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">03b</span><span class="section-title">Condiciones Comerciales</span><span class="section-title-en">Commercial Terms</span></div>
+        <div class="grid grid-2">
+          <div class="field"><label>Plazo de Pago Requerido</label><select class="select" id="f-plazo"><option value="">Seleccionar…</option><option>Pago anticipado (antes del servicio)</option><option>Pago inmediato (contra entrega)</option><option>15 días</option><option>30 días</option><option>45 días</option><option>60 días</option></select></div>
+          <div class="field"><label>Tipo de Facturación</label><select class="select" id="f-factura"><option value="">Seleccionar…</option><option>Factura Electrónica DIAN</option><option>Factura de Venta (física)</option><option>Cuenta de Cobro</option><option>Invoice (exportación)</option></select></div>
+          <div class="field col-full"><label>Retención en la Fuente Aplicable</label><select class="select" id="f-rte"><option value="">Seleccionar…</option><option>3.5% — Servicios en general</option><option>4% — Servicios de transporte</option><option>6% — Honorarios (Persona Natural declarante)</option><option>10% — Honorarios (No declarante)</option><option>11% — Honorarios (Gran contribuyente)</option><option>No aplica — Exento</option><option>Otro (especificar en observaciones)</option></select></div>
+          <div class="field col-full"><label>Observaciones Comerciales</label><textarea class="textarea" id="f-obs" placeholder="Condiciones especiales, descuentos por volumen, exclusividades, etc."></textarea></div>
+        </div>
+      </div>
+      <div class="nav-btns"><button type="button" class="btn-back" onclick="goPage(2)">← Anterior</button><button type="button" class="btn-next" onclick="goPage(4)">Continuar — Documentos <span class="btn-arrow">→</span></button></div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="form-page" id="page4">
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">04</span><span class="section-title">Documentos Requeridos</span><span class="section-title-en">Required Documents</span></div>
+
+        <div style="margin-bottom:24px;padding:14px 18px;background:rgba(124,58,237,.06);border:1px solid var(--border);border-radius:var(--r2);font-size:12px;color:var(--t60);line-height:1.7">
+          📁 <strong style="color:var(--t90)">Selecciona los archivos desde tu dispositivo o arrástralos al recuadro.</strong><br>
+          Los documentos se adjuntan al formulario y llegan a <strong style="color:var(--t90)">admin@iworkcenter.work</strong>. Formatos: PDF, JPG, PNG · Máx 10MB.
+        </div>
+
+        <div class="grid" style="gap:20px">
+
+          <!-- RUT -->
+          <div class="upload-field">
+            <div class="upload-label">📄 RUT — Registro Único Tributario <span class="badge-req">Requerido</span></div>
+            <div class="upload-zone" id="zone-rut"
+              onclick="document.getElementById('fi-rut').click()"
+              ondragover="onDragOver(event,'rut')"
+              ondragleave="onDragLeave('rut')"
+              ondrop="onDrop(event,'rut')">
+              <div class="uz-icon" id="icon-rut">📄</div>
+              <div class="uz-body">
+                <div class="uz-name" id="name-rut">Registro Único Tributario</div>
+                <div class="uz-hint" id="hint-rut">PDF · JPG · PNG · Máx 10MB · Arrastra o haz clic</div>
+                <div class="uz-bar-wrap" id="bar-rut"><div class="uz-bar" id="barfill-rut"></div></div>
+              </div>
+              <button type="button" class="uz-cta" id="cta-rut" onclick="event.stopPropagation();document.getElementById('fi-rut').click()">Seleccionar</button>
+            </div>
+            <input type="file" class="file-input-hidden" id="fi-rut" accept=".pdf,.jpg,.jpeg,.png" onchange="onFileChange('rut',this)">
+            <div class="file-status" id="st-rut">— Ningún archivo seleccionado</div>
+          </div>
+
+          <!-- CERT BANCARIA -->
+          <div class="upload-field">
+            <div class="upload-label">🏦 Certificación Bancaria <span class="badge-req">Requerido</span></div>
+            <div class="upload-zone" id="zone-cert"
+              onclick="document.getElementById('fi-cert').click()"
+              ondragover="onDragOver(event,'cert')"
+              ondragleave="onDragLeave('cert')"
+              ondrop="onDrop(event,'cert')">
+              <div class="uz-icon" id="icon-cert">🏦</div>
+              <div class="uz-body">
+                <div class="uz-name" id="name-cert">Certificación Bancaria</div>
+                <div class="uz-hint" id="hint-cert">No mayor a 30 días · PDF · Máx 10MB · Arrastra o haz clic</div>
+                <div class="uz-bar-wrap" id="bar-cert"><div class="uz-bar" id="barfill-cert"></div></div>
+              </div>
+              <button type="button" class="uz-cta" id="cta-cert" onclick="event.stopPropagation();document.getElementById('fi-cert').click()">Seleccionar</button>
+            </div>
+            <input type="file" class="file-input-hidden" id="fi-cert" accept=".pdf,.jpg,.jpeg,.png" onchange="onFileChange('cert',this)">
+            <div class="file-status" id="st-cert">— Ningún archivo seleccionado</div>
+          </div>
+
+          <!-- PORTAFOLIO -->
+          <div class="upload-field">
+            <div class="upload-label">📎 Portafolio de Servicios <span class="badge-opt">Opcional</span></div>
+            <div class="upload-zone" id="zone-port"
+              onclick="document.getElementById('fi-port').click()"
+              ondragover="onDragOver(event,'port')"
+              ondragleave="onDragLeave('port')"
+              ondrop="onDrop(event,'port')">
+              <div class="uz-icon" id="icon-port">📎</div>
+              <div class="uz-body">
+                <div class="uz-name" id="name-port">Brochure o Portafolio</div>
+                <div class="uz-hint" id="hint-port">PDF · JPG · PNG · Máx 10MB · Arrastra o haz clic</div>
+                <div class="uz-bar-wrap" id="bar-port"><div class="uz-bar" id="barfill-port"></div></div>
+              </div>
+              <button type="button" class="uz-cta" id="cta-port" onclick="event.stopPropagation();document.getElementById('fi-port').click()">Seleccionar</button>
+            </div>
+            <input type="file" class="file-input-hidden" id="fi-port" accept=".pdf,.jpg,.jpeg,.png" onchange="onFileChange('port',this)">
+            <div class="file-status" id="st-port">— Ningún archivo seleccionado</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section visible">
+        <div class="section-hd"><span class="section-num">04b</span><span class="section-title">Declaraciones Legales</span><span class="section-title-en">Legal Declarations</span></div>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox" id="c-datos"><div class="check-box"></div><span class="check-label"><strong>Autorización Tratamiento de Datos Personales.</strong> Autorizo a BPOS SAS · BPOS LATAM para recolectar, almacenar, usar y procesar mis datos de acuerdo con la <a href="#">Política de Privacidad</a> y la Ley 1581 de 2012.</span></label>
+          <label class="check-item"><input type="checkbox" id="c-terminos"><div class="check-box"></div><span class="check-label"><strong>Términos y Condiciones.</strong> He leído y acepto los <a href="#">Términos y Condiciones</a> para proveedores de BPOS LATAM, incluyendo las políticas de pagos, confidencialidad y propiedad intelectual.</span></label>
+          <label class="check-item"><input type="checkbox" id="c-sagrilaft"><div class="check-box"></div><span class="check-label"><strong>Declaración SAGRILAFT / LAFT.</strong> Declaro que los recursos utilizados en esta relación comercial provienen de actividades lícitas y no tengo vínculos con actividades de lavado de activos o financiación del terrorismo.</span></label>
+          <label class="check-item"><input type="checkbox" id="c-veracidad"><div class="check-box"></div><span class="check-label"><strong>Veracidad de la Información.</strong> Declaro bajo la gravedad del juramento que toda la información y documentos aportados en este formulario son verídicos, auténticos y están vigentes.</span></label>
+        </div>
+      </div>
+
+      <div class="cta-zone">
+        <div>
+          <div class="cta-title">Enviar Registro Completo</div>
+          <div class="cta-sub">Datos + documentos llegan a admin@iworkcenter.work<br>Aprobación en 2–3 días hábiles.</div>
+        </div>
+        <button type="button" class="btn-submit" id="btnSubmit" onclick="submitForm()">
+          <span class="btn-label">Registrar como Proveedor</span>
+          <div class="spinner"></div>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+      <div class="nav-btns"><button type="button" class="btn-back" onclick="goPage(3)">← Anterior</button><div></div></div>
+    </div>
+
+    <div class="form-footer">
+      <div style="display:flex;align-items:center;gap:16px">
+        <span class="footer-brand">BPOS LATAM</span><div class="footer-sep"></div><span class="footer-brand">BPOS SAS · LATAM</span>
+      </div>
+      <div class="footer-legal">Formulario de uso interno. La información suministrada es confidencial y será usada exclusivamente para procesos administrativos y de pagos. Colombia · 2026.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const FORMSPREE = 'https://formspree.io/f/mjgarekr';
+const MAX_BYTES = 10 * 1024 * 1024;
+const ALLOWED   = ['application/pdf','image/jpeg','image/png','image/jpg'];
+
+/* ID & fecha */
+const pad = n => String(n).padStart(2,'0');
+const now = new Date();
+const regId = now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+document.getElementById('docId').querySelector('span').textContent = regId;
+document.getElementById('docDate').textContent = now.toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'});
+
+/* Toast */
+function toast(msg, type='error') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast'+(type==='success'?' green':'');
+  el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),5000);
+}
+
+/* Navegación */
+let cur = 1;
+window.goPage = n => {
+  document.getElementById('page'+cur).classList.remove('active');
+  for(let i=1;i<=4;i++){
+    document.getElementById('pb'+i).className='prog-step'+(i<n?' done':i===n?' active':'');
+    document.getElementById('pl'+i).className='prog-lbl'+(i===n?' active':'');
+  }
+  cur=n; document.getElementById('page'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+/* Observer */
+const io = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.section').forEach(s=>io.observe(s));
+
+/* Archivos en memoria */
+const files = { rut:null, cert:null, port:null };
+
+function fmtSize(b){ return b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(1)+' MB'; }
+
+function onDragOver(e, k) { e.preventDefault(); document.getElementById('zone-'+k).classList.add('dragover'); }
+function onDragLeave(k)   { document.getElementById('zone-'+k).classList.remove('dragover'); }
+function onDrop(e, k) {
+  e.preventDefault(); onDragLeave(k);
+  const f = e.dataTransfer.files[0]; if(!f) return;
+  try { const dt=new DataTransfer(); dt.items.add(f); document.getElementById('fi-'+k).files=dt.files; } catch(_){}
+  processFile(k, f);
+}
+function onFileChange(k, input) {
+  const f = input.files[0]; if(f) processFile(k, f);
+}
+
+function processFile(k, f) {
+  const zone = document.getElementById('zone-'+k);
+  const st   = document.getElementById('st-'+k);
+
+  zone.classList.remove('uz-ok','uz-err','dragover');
+
+  if (f.size > MAX_BYTES) {
+    zone.classList.add('uz-err');
+    st.className='file-status fs-err'; st.textContent='❌ Archivo demasiado grande — máx 10MB';
+    files[k]=null; return;
+  }
+  if (!ALLOWED.includes(f.type) && !/\.(pdf|jpg|jpeg|png)$/i.test(f.name)) {
+    zone.classList.add('uz-err');
+    st.className='file-status fs-err'; st.textContent='❌ Formato no permitido. Usa PDF, JPG o PNG.';
+    files[k]=null; return;
+  }
+
+  /* Animación de progreso */
+  const barWrap = document.getElementById('bar-'+k);
+  const barFill = document.getElementById('barfill-'+k);
+  barWrap.style.display='block'; barFill.style.width='0%';
+  st.className='file-status fs-busy'; st.textContent='⏳ Procesando…';
+
+  let w=0;
+  const iv = setInterval(()=>{ w=Math.min(w+Math.random()*30,85); barFill.style.width=w+'%'; },100);
+
+  const reader = new FileReader();
+  reader.onload = ev => {
+    clearInterval(iv); barFill.style.width='100%';
+    setTimeout(()=>{
+      barWrap.style.display='none'; barFill.style.width='0%';
+      files[k] = { name:f.name, size:f.size, type:f.type, data:ev.target.result };
+      zone.classList.add('uz-ok');
+      document.getElementById('icon-'+k).textContent = '✅';
+      document.getElementById('name-'+k).textContent = f.name;
+      document.getElementById('hint-'+k).textContent = fmtSize(f.size)+' · '+f.type.split('/')[1].toUpperCase()+' · listo';
+      document.getElementById('cta-'+k).textContent  = 'Cambiar';
+      st.className='file-status fs-ok'; st.textContent='✅ '+f.name+' adjuntado correctamente';
+    },300);
+  };
+  reader.onerror = () => {
+    clearInterval(iv); barWrap.style.display='none'; files[k]=null;
+    zone.classList.add('uz-err');
+    st.className='file-status fs-err'; st.textContent='❌ Error al leer el archivo. Intenta de nuevo.';
+  };
+  reader.readAsDataURL(f);
+}
+
+/* Submit */
+window.submitForm = async () => {
+  if (!['c-datos','c-terminos','c-sagrilaft','c-veracidad'].every(id=>document.getElementById(id).checked)) {
+    toast('⚠️ Acepta todas las declaraciones legales para continuar.'); return;
+  }
+  const razon = document.getElementById('f-razon').value.trim();
+  const nit   = document.getElementById('f-nit').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!razon||!nit||!email) { toast('⚠️ Completa Razón Social, NIT y Email corporativo.'); goPage(1); return; }
+  if (!files.rut)  { toast('📄 El RUT es obligatorio. Por favor súbelo.');                 goPage(4); return; }
+  if (!files.cert) { toast('🏦 La Certificación Bancaria es obligatoria. Súbela.');         goPage(4); return; }
+
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled=true; btn.classList.add('loading');
+
+  const g = id => document.getElementById(id).value;
+  const payload = {
+    _subject: `[Proveedor] ${razon} · NIT ${nit} · ${regId}`,
+    _replyto: email,
+    'ID':              regId,
+    'Fecha':           now.toLocaleString('es-CO'),
+    'Razón Social':    razon, 'NIT': nit,
+    'Tipo Empresa':    g('f-tipo'), 'País': g('f-pais'), 'Ciudad': g('f-ciudad'),
+    'Régimen':         g('f-regimen'), 'Dirección': g('f-dir'),
+    'Tel Empresa':     g('f-tel'), 'Web': g('f-web'), 'Descripción': g('f-desc'),
+    'Categoría':       g('f-cat'), 'Cobertura': g('f-cob'), 'Servicios': g('f-svcs'),
+    'Contacto':        g('f-rep'), 'Cargo': g('f-cargo'),
+    'Email Corp':      email, 'Email Factura': g('f-opemail'),
+    'Tel Contacto':    g('f-telrep'), 'WhatsApp': g('f-wa'), 'Comunicación': g('f-comm'),
+    'Banco':           g('f-banco'), 'Tipo Cuenta': g('f-tipocta'),
+    'Num Cuenta':      g('f-numcta'), 'Titular': g('f-titular'), 'NIT Titular': g('f-titularid'),
+    'Moneda':          g('f-moneda'), 'Plazo': g('f-plazo'),
+    'Facturación':     g('f-factura'), 'Retención': g('f-rte'), 'Observaciones': g('f-obs'),
+    'RUT-nombre':      files.rut.name,  'RUT-tamaño': fmtSize(files.rut.size),  'RUT-archivo': files.rut.data,
+    'Cert-nombre':     files.cert.name, 'Cert-tamaño':fmtSize(files.cert.size), 'Cert-archivo': files.cert.data,
+    'Port-nombre':     files.port ? files.port.name : 'No adjuntado',
+    'Port-archivo':    files.port ? files.port.data : 'No adjuntado',
+  };
+
+  try {
+    const res  = await fetch(FORMSPREE,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+    const json = await res.json();
+    if (res.ok) {
+      document.getElementById('formWrap').style.display='none';
+      document.getElementById('successScreen').classList.add('show');
+      document.getElementById('successId').textContent='ID: '+regId+' · '+now.toLocaleDateString('es-CO');
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else {
+      const msg = json.errors?json.errors.map(e=>e.message).join(', '):'Error al enviar.';
+      toast('❌ '+msg); btn.disabled=false; btn.classList.remove('loading');
+    }
+  } catch(e) {
+    toast('❌ Sin conexión. Verifica tu internet e intenta de nuevo.');
+    btn.disabled=false; btn.classList.remove('loading');
+  }
+};
+</script>
+</body>
+</html>
