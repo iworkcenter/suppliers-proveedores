@@ -6,8 +6,14 @@
 <title>Supplier Registration · BPOS LATAM</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- ✅ Uploadcare Widget -->
-<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<!-- ✅ FIX: Uploadcare key declarada ANTES de cargar el script -->
+<script>
+  UPLOADCARE_PUBLIC_KEY = '26dff079e44d8f9e1667';
+  UPLOADCARE_LOCALE = 'es';
+  UPLOADCARE_TABS = 'file';
+  UPLOADCARE_PREVIEW_STEP = true;
+</script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
 
 <style>
 :root {
@@ -31,7 +37,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--text-90);min-height:100vh;overflow-x:hidden;position:relative}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(124,58,237,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 85% 100%,rgba(124,58,237,.08) 0%,transparent 55%);pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:0}
 
 .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 24px 80px}
 
@@ -101,21 +106,26 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .select option{background:var(--card)}
 .textarea{resize:vertical;min-height:88px}
 
-/* Uploadcare */
+/* Upload boxes — reemplaza Uploadcare con input nativo estilizado */
 .uc-field{display:flex;flex-direction:column;gap:8px}
 .uc-label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-60);display:flex;align-items:center;gap:6px}
 .uc-required{color:var(--error)}
 .uc-optional{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
 .uc-req-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2);color:#f87171;text-transform:uppercase;letter-spacing:.06em}
-.uc-box{border:1px dashed rgba(124,58,237,.3);border-radius:var(--r2);padding:18px 20px;background:rgba(124,58,237,.02);transition:border-color .2s,background .2s;display:flex;align-items:center;gap:14px}
-.uc-box:hover{border-color:var(--violet);background:rgba(124,58,237,.06)}
+
+/* ✅ FIX: Upload box nativo sin depender del widget Uploadcare */
+.upload-box{border:1px dashed rgba(124,58,237,.3);border-radius:var(--r2);padding:18px 20px;background:rgba(124,58,237,.02);transition:border-color .2s,background .2s;display:flex;align-items:center;gap:14px;cursor:pointer}
+.upload-box:hover{border-color:var(--violet);background:rgba(124,58,237,.06)}
+.upload-box.has-file{border-color:var(--success);background:rgba(16,185,129,.04)}
 .uc-icon{width:36px;height:36px;border-radius:8px;background:rgba(124,58,237,.12);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
 .uc-info{flex:1}
 .uc-title{font-size:13px;color:var(--text-90);font-weight:500;margin-bottom:2px}
 .uc-sub{font-size:11px;color:var(--text-30)}
-.uploadcare--widget__button{background:rgba(124,58,237,.15)!important;border:1px solid var(--border)!important;color:var(--violet2)!important;font-family:'DM Sans',sans-serif!important;font-size:12px!important;border-radius:var(--r)!important;padding:8px 14px!important;cursor:pointer!important;transition:all .2s!important;margin-top:8px!important}
-.uploadcare--widget__button:hover{background:rgba(124,58,237,.3)!important;color:white!important}
-.uploadcare--widget__file-name{font-size:11px;color:var(--success);margin-top:4px;font-family:'DM Mono',monospace}
+
+.file-input-hidden{display:none}
+.file-select-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.15);border:1px solid var(--border);color:var(--violet2);font-family:'DM Sans',sans-serif;font-size:12px;border-radius:var(--r);padding:8px 14px;cursor:pointer;transition:all .2s}
+.file-select-btn:hover{background:rgba(124,58,237,.3);color:white}
+
 .file-status{margin-top:6px;font-size:11px;font-family:'DM Mono',monospace;color:var(--text-30);min-height:18px;transition:color .3s}
 .file-status.uploading{color:var(--gold)}
 .file-status.done{color:var(--success)}
@@ -179,6 +189,35 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .form-page{display:none}
 .form-page.active{display:block;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Uploadcare widget override */
+.uploadcare--widget{margin-top:8px}
+.uploadcare--widget__button{
+  background:rgba(124,58,237,.15)!important;
+  border:1px solid rgba(124,58,237,.3)!important;
+  color:var(--violet2)!important;
+  font-family:'DM Sans',sans-serif!important;
+  font-size:12px!important;
+  border-radius:6px!important;
+  padding:8px 16px!important;
+  cursor:pointer!important;
+  transition:all .2s!important;
+}
+.uploadcare--widget__button:hover{
+  background:rgba(124,58,237,.35)!important;
+  color:white!important;
+}
+.uploadcare--widget__file-name{
+  font-size:11px!important;
+  color:var(--success)!important;
+  margin-top:4px!important;
+  font-family:'DM Mono',monospace!important;
+}
+.uploadcare--widget__button_type_cancel{
+  background:rgba(244,63,94,.1)!important;
+  border-color:rgba(244,63,94,.3)!important;
+  color:#f87171!important;
+}
 </style>
 </head>
 <body>
@@ -519,7 +558,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <!-- PAGE 4 -->
+    <!-- PAGE 4 — DOCUMENTOS -->
     <div class="form-page" id="page4">
       <div class="section visible">
         <div class="section-hd">
@@ -534,57 +573,93 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
 
         <div class="grid" style="gap:16px">
+
+          <!-- RUT -->
           <div class="uc-field">
             <div class="uc-label">📄 RUT — Registro Único Tributario <span class="uc-req-badge">Requerido</span></div>
-            <div class="uc-box">
+            <div class="upload-box" id="box-rut">
               <div class="uc-icon">📄</div>
               <div class="uc-info">
                 <div class="uc-title">Registro Único Tributario</div>
                 <div class="uc-sub">PDF · JPG · PNG · Máx 10MB</div>
-                <input type="hidden" role="uploadcare-uploader" id="uc-rut" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-effects="crop" data-images-only="false" data-input-accept-types="image/*,application/pdf" data-max-local-file-size="10000000"/>
+                <!-- ✅ FIX: input con role uploadcare-uploader SIN data-public-key (se toma del global) -->
+                <input type="hidden"
+                  role="uploadcare-uploader"
+                  id="uc-rut"
+                  name="uc-rut"
+                  data-tabs="file"
+                  data-preview-step="true"
+                  data-images-only="false"
+                  data-input-accept-types="image/*,application/pdf"
+                  data-max-local-file-size="10000000" />
               </div>
             </div>
             <div class="file-status" id="status-rut">— Ningún archivo seleccionado</div>
           </div>
 
+          <!-- CERT BANCARIA -->
           <div class="uc-field">
             <div class="uc-label">🏦 Certificación Bancaria <span class="uc-req-badge">Requerido</span></div>
-            <div class="uc-box">
+            <div class="upload-box" id="box-cert">
               <div class="uc-icon">🏦</div>
               <div class="uc-info">
                 <div class="uc-title">Certificación Bancaria</div>
                 <div class="uc-sub">No mayor a 30 días · PDF · Máx 10MB</div>
-                <input type="hidden" role="uploadcare-uploader" id="uc-cert" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-input-accept-types="image/*,application/pdf" data-max-local-file-size="10000000"/>
+                <input type="hidden"
+                  role="uploadcare-uploader"
+                  id="uc-cert"
+                  name="uc-cert"
+                  data-tabs="file"
+                  data-preview-step="true"
+                  data-input-accept-types="image/*,application/pdf"
+                  data-max-local-file-size="10000000" />
               </div>
             </div>
             <div class="file-status" id="status-cert">— Ningún archivo seleccionado</div>
           </div>
 
+          <!-- ESTADOS FINANCIEROS -->
           <div class="uc-field">
             <div class="uc-label">📊 Estados Financieros <span class="uc-optional">Opcional</span></div>
-            <div class="uc-box">
+            <div class="upload-box" id="box-estados">
               <div class="uc-icon">📊</div>
               <div class="uc-info">
                 <div class="uc-title">Estados Financieros (últimos 2 años)</div>
                 <div class="uc-sub">PDF · Excel · Máx 15MB</div>
-                <input type="hidden" role="uploadcare-uploader" id="uc-estados" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-input-accept-types="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" data-max-local-file-size="15000000"/>
+                <input type="hidden"
+                  role="uploadcare-uploader"
+                  id="uc-estados"
+                  name="uc-estados"
+                  data-tabs="file"
+                  data-preview-step="true"
+                  data-input-accept-types="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  data-max-local-file-size="15000000" />
               </div>
             </div>
             <div class="file-status" id="status-estados">— Ningún archivo seleccionado</div>
           </div>
 
+          <!-- PORTAFOLIO -->
           <div class="uc-field">
             <div class="uc-label">📎 Portafolio de Servicios <span class="uc-optional">Opcional</span></div>
-            <div class="uc-box">
+            <div class="upload-box" id="box-portafolio">
               <div class="uc-icon">📎</div>
               <div class="uc-info">
                 <div class="uc-title">Brochure o Portafolio</div>
                 <div class="uc-sub">PDF · Máx 20MB</div>
-                <input type="hidden" role="uploadcare-uploader" id="uc-portafolio" data-public-key="demopublickey" data-tabs="file" data-preview-step="true" data-input-accept-types="application/pdf" data-max-local-file-size="20000000"/>
+                <input type="hidden"
+                  role="uploadcare-uploader"
+                  id="uc-portafolio"
+                  name="uc-portafolio"
+                  data-tabs="file"
+                  data-preview-step="true"
+                  data-input-accept-types="application/pdf"
+                  data-max-local-file-size="20000000" />
               </div>
             </div>
             <div class="file-status" id="status-portafolio">— Ningún archivo seleccionado</div>
           </div>
+
         </div>
       </div>
 
@@ -647,141 +722,192 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div class="footer-legal">Formulario de uso interno. La información suministrada es confidencial y será usada exclusivamente para procesos administrativos y de pagos. Colombia · 2026.</div>
     </div>
 
-  </div>
-</div>
+  </div><!-- /formWrap -->
+</div><!-- /wrap -->
 
 <script>
-const UPLOADCARE_PUBLIC_KEY = '26dff079e44d8f9e1667';
-const FORMSPREE_ENDPOINT    = 'https://formspree.io/f/mjgarekr';
+/* ─── CONFIG ─── */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mjgarekr';
 
+/* ─── DOC ID & DATE ─── */
 const pad = n => String(n).padStart(2,'0');
-const d = new Date();
+const d   = new Date();
 const regId = d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
 document.getElementById('docId').querySelector('span').textContent = regId;
 document.getElementById('docDate').textContent = d.toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'});
-document.querySelectorAll('[data-public-key]').forEach(el=>{ el.dataset.publicKey = UPLOADCARE_PUBLIC_KEY; });
 
-function showToast(msg,type='error'){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.className='toast'+(type==='success'?' green':'');
+/* ─── TOAST ─── */
+function showToast(msg, type='error'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type==='success' ? ' green' : '');
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),5000);
+  setTimeout(() => t.classList.remove('show'), 5000);
 }
 
-let currentPage=1;
-const totalPages=4;
-window.goPage=(n)=>{
+/* ─── NAVEGACIÓN ─── */
+let currentPage = 1;
+const totalPages = 4;
+window.goPage = (n) => {
   document.getElementById('page'+currentPage).classList.remove('active');
-  for(let i=1;i<=totalPages;i++){
-    document.getElementById('pb'+i).className='prog-step'+(i<n?' done':i===n?' active':'');
-    document.getElementById('pl'+i).className='prog-lbl'+(i===n?' active':'');
+  for(let i=1; i<=totalPages; i++){
+    document.getElementById('pb'+i).className = 'prog-step'+(i<n?' done':i===n?' active':'');
+    document.getElementById('pl'+i).className  = 'prog-lbl'+(i===n?' active':'');
   }
-  currentPage=n;
+  currentPage = n;
   document.getElementById('page'+n).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 };
 
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+/* ─── INTERSECTION OBSERVER ─── */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:.1});
 document.querySelectorAll('.section').forEach(s=>io.observe(s));
 
-const fileLinks={rut:null,cert:null,estados:null,portafolio:null};
-function initUploadcare(){
-  const widgets={'uc-rut':'rut','uc-cert':'cert','uc-estados':'estados','uc-portafolio':'portafolio'};
-  Object.entries(widgets).forEach(([id,key])=>{
-    const el=document.getElementById(id);
-    if(!el)return;
-    const widget=uploadcare.Widget(el);
-    const statusEl=document.getElementById('status-'+key);
-    widget.onChange(file=>{
-      if(!file){fileLinks[key]=null;return;}
-      statusEl.className='file-status uploading';
-      statusEl.textContent='⏳ Subiendo archivo…';
-      file.promise().then(info=>{
-        fileLinks[key]=info.cdnUrl;
-        statusEl.className='file-status done';
-        statusEl.textContent='✅ '+info.name+' — listo';
-      }).fail(()=>{
-        fileLinks[key]=null;
-        statusEl.className='file-status error';
-        statusEl.textContent='❌ Error al subir. Intenta de nuevo.';
+/* ─── UPLOADCARE ─── */
+/* ✅ FIX PRINCIPAL: inicializar widgets DESPUÉS de que el DOM esté completamente cargado
+   usando DOMContentLoaded + pequeño delay para asegurar que el script de UC esté listo */
+const fileLinks = { rut: null, cert: null, estados: null, portafolio: null };
+
+function initUploadcareWidgets() {
+  const widgetMap = {
+    'uc-rut':       'rut',
+    'uc-cert':      'cert',
+    'uc-estados':   'estados',
+    'uc-portafolio':'portafolio',
+  };
+
+  // Verificar que uploadcare esté disponible
+  if (typeof uploadcare === 'undefined') {
+    console.error('Uploadcare no cargó correctamente');
+    showToast('⚠️ Error al cargar el módulo de archivos. Recarga la página.', 'error');
+    return;
+  }
+
+  Object.entries(widgetMap).forEach(([elId, key]) => {
+    const el = document.getElementById(elId);
+    if (!el) { console.warn('No se encontró el elemento:', elId); return; }
+
+    try {
+      const widget = uploadcare.Widget(el);
+
+      widget.onChange(file => {
+        const statusEl = document.getElementById('status-' + key);
+        const boxEl    = document.getElementById('box-' + key);
+        if (!file) {
+          fileLinks[key] = null;
+          if(statusEl) { statusEl.className='file-status'; statusEl.textContent='— Ningún archivo seleccionado'; }
+          if(boxEl) boxEl.classList.remove('has-file');
+          return;
+        }
+        if(statusEl) { statusEl.className='file-status uploading'; statusEl.textContent='⏳ Subiendo archivo…'; }
+
+        file.promise()
+          .then(info => {
+            fileLinks[key] = info.cdnUrl;
+            if(statusEl) { statusEl.className='file-status done'; statusEl.textContent='✅ '+info.name+' — listo'; }
+            if(boxEl) boxEl.classList.add('has-file');
+          })
+          .fail(err => {
+            console.error('Upload error:', err);
+            fileLinks[key] = null;
+            if(statusEl) { statusEl.className='file-status error'; statusEl.textContent='❌ Error al subir. Intenta de nuevo.'; }
+            if(boxEl) boxEl.classList.remove('has-file');
+          });
       });
-    });
+
+    } catch(err) {
+      console.error('Error inicializando widget para', elId, err);
+    }
   });
 }
-window.addEventListener('DOMContentLoaded',initUploadcare);
 
-window.submitForm=async()=>{
-  const checks=['c-datos','c-terminos','c-sagrilaft','c-veracidad'];
-  if(!checks.every(id=>document.getElementById(id).checked)){
-    showToast('⚠️ Acepta todas las declaraciones legales para continuar.');return;
+// ✅ FIX: esperar a que todo esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => setTimeout(initUploadcareWidgets, 300));
+} else {
+  setTimeout(initUploadcareWidgets, 300);
+}
+
+/* ─── SUBMIT ─── */
+window.submitForm = async () => {
+  const checks = ['c-datos','c-terminos','c-sagrilaft','c-veracidad'];
+  if (!checks.every(id => document.getElementById(id).checked)) {
+    showToast('⚠️ Acepta todas las declaraciones legales para continuar.'); return;
   }
-  const razon=document.getElementById('f-razon').value.trim();
-  const nit=document.getElementById('f-nit').value.trim();
-  const email=document.getElementById('f-email').value.trim();
-  if(!razon||!nit||!email){showToast('⚠️ Completa Razón Social, NIT y Email corporativo.');goPage(1);return;}
-  if(!fileLinks.rut){showToast('📄 El RUT es obligatorio. Por favor súbelo.');goPage(4);return;}
-  if(!fileLinks.cert){showToast('🏦 La Certificación Bancaria es obligatoria. Por favor súbela.');goPage(4);return;}
-  if(FORMSPREE_ENDPOINT.includes('XXXXXXXX')){showToast('⚙️ Configura el endpoint de Formspree en el código.');return;}
-  const btn=document.getElementById('btnSubmit');
-  btn.disabled=true;btn.classList.add('loading');
-  const payload={
-    _subject:`[Proveedor] ${razon} · NIT ${nit} · ID ${regId}`,
-    _replyto:email,
-    '📋 ID Registro':regId,
-    '📅 Fecha Envío':new Date().toLocaleString('es-CO'),
-    '🏢 Razón Social':razon,'🔢 NIT':nit,
-    '🏛 Tipo Empresa':document.getElementById('f-tipo').value,
-    '🌎 País':document.getElementById('f-pais').value,
-    '📍 Ciudad':document.getElementById('f-ciudad').value,
-    '📑 Régimen Tributario':document.getElementById('f-regimen').value,
-    '🏠 Dirección':document.getElementById('f-dir').value,
-    '📞 Teléfono Empresa':document.getElementById('f-tel').value,
-    '🌐 Sitio Web':document.getElementById('f-web').value,
-    '📝 Descripción':document.getElementById('f-desc').value,
-    '🗂 Categoría':document.getElementById('f-cat').value,
-    '🗺 Cobertura':document.getElementById('f-cob').value,
-    '💼 Servicios':document.getElementById('f-svcs').value,
-    '👤 Contacto':document.getElementById('f-rep').value,
-    '💼 Cargo':document.getElementById('f-cargo').value,
-    '✉️ Email Corporativo':email,
-    '✉️ Email Facturación':document.getElementById('f-opemail').value,
-    '📱 Teléfono Contacto':document.getElementById('f-telrep').value,
-    '💬 WhatsApp':document.getElementById('f-wa').value,
-    '📡 Comunicación Pref':document.getElementById('f-comm').value,
-    '🏦 Banco':document.getElementById('f-banco').value,
-    '💳 Tipo Cuenta':document.getElementById('f-tipocta').value,
-    '🔢 Número Cuenta':document.getElementById('f-numcta').value,
-    '👤 Titular':document.getElementById('f-titular').value,
-    '🔢 NIT Titular':document.getElementById('f-titularid').value,
-    '💱 Moneda':document.getElementById('f-moneda').value,
-    '⏱ Plazo Pago':document.getElementById('f-plazo').value,
-    '🧾 Tipo Facturación':document.getElementById('f-factura').value,
-    '📊 Retención':document.getElementById('f-rte').value,
-    '📌 Observaciones':document.getElementById('f-obs').value,
-    '📄 RUT (link descarga)':fileLinks.rut||'No subido',
-    '🏦 Cert Bancaria (link descarga)':fileLinks.cert||'No subido',
-    '📊 Estados Financieros (link)':fileLinks.estados||'No adjuntado',
-    '📎 Portafolio (link)':fileLinks.portafolio||'No adjuntado',
+  const razon = document.getElementById('f-razon').value.trim();
+  const nit   = document.getElementById('f-nit').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!razon||!nit||!email) { showToast('⚠️ Completa Razón Social, NIT y Email corporativo.'); goPage(1); return; }
+  if (!fileLinks.rut)  { showToast('📄 El RUT es obligatorio. Por favor súbelo.'); goPage(4); return; }
+  if (!fileLinks.cert) { showToast('🏦 La Certificación Bancaria es obligatoria. Por favor súbela.'); goPage(4); return; }
+
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true; btn.classList.add('loading');
+
+  const payload = {
+    _subject: `[Proveedor] ${razon} · NIT ${nit} · ID ${regId}`,
+    _replyto: email,
+    '📋 ID Registro':     regId,
+    '📅 Fecha Envío':     new Date().toLocaleString('es-CO'),
+    '🏢 Razón Social':    razon,
+    '🔢 NIT':             nit,
+    '🏛 Tipo Empresa':    document.getElementById('f-tipo').value,
+    '🌎 País':            document.getElementById('f-pais').value,
+    '📍 Ciudad':          document.getElementById('f-ciudad').value,
+    '📑 Régimen':         document.getElementById('f-regimen').value,
+    '🏠 Dirección':       document.getElementById('f-dir').value,
+    '📞 Teléfono':        document.getElementById('f-tel').value,
+    '🌐 Web':             document.getElementById('f-web').value,
+    '📝 Descripción':     document.getElementById('f-desc').value,
+    '🗂 Categoría':       document.getElementById('f-cat').value,
+    '🗺 Cobertura':       document.getElementById('f-cob').value,
+    '💼 Servicios':       document.getElementById('f-svcs').value,
+    '👤 Contacto':        document.getElementById('f-rep').value,
+    '💼 Cargo':           document.getElementById('f-cargo').value,
+    '✉️ Email':           email,
+    '✉️ Email Factura':   document.getElementById('f-opemail').value,
+    '📱 Tel Contacto':    document.getElementById('f-telrep').value,
+    '💬 WhatsApp':        document.getElementById('f-wa').value,
+    '📡 Comunicación':    document.getElementById('f-comm').value,
+    '🏦 Banco':           document.getElementById('f-banco').value,
+    '💳 Tipo Cuenta':     document.getElementById('f-tipocta').value,
+    '🔢 Num Cuenta':      document.getElementById('f-numcta').value,
+    '👤 Titular':         document.getElementById('f-titular').value,
+    '🔢 NIT Titular':     document.getElementById('f-titularid').value,
+    '💱 Moneda':          document.getElementById('f-moneda').value,
+    '⏱ Plazo Pago':       document.getElementById('f-plazo').value,
+    '🧾 Facturación':     document.getElementById('f-factura').value,
+    '📊 Retención':       document.getElementById('f-rte').value,
+    '📌 Observaciones':   document.getElementById('f-obs').value,
+    '📄 RUT (URL)':           fileLinks.rut || 'No subido',
+    '🏦 Cert Bancaria (URL)': fileLinks.cert || 'No subido',
+    '📊 Estados Fin (URL)':   fileLinks.estados || 'No adjuntado',
+    '📎 Portafolio (URL)':    fileLinks.portafolio || 'No adjuntado',
   };
-  try{
-    const res=await fetch(FORMSPREE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
-    const json=await res.json();
-    if(res.ok){
-      document.getElementById('formWrap').style.display='none';
-      const ss=document.getElementById('successScreen');
+
+  try {
+    const res  = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if (res.ok) {
+      document.getElementById('formWrap').style.display = 'none';
+      const ss = document.getElementById('successScreen');
       ss.classList.add('show');
-      document.getElementById('successId').textContent='ID de Registro: '+regId+' · '+new Date().toLocaleDateString('es-CO');
-      window.scrollTo({top:0,behavior:'smooth'});
-    }else{
-      const errMsg=json.errors?json.errors.map(e=>e.message).join(', '):'Error al enviar.';
-      showToast('❌ '+errMsg);btn.disabled=false;btn.classList.remove('loading');
+      document.getElementById('successId').textContent = 'ID de Registro: '+regId+' · '+new Date().toLocaleDateString('es-CO');
+      window.scrollTo({top:0, behavior:'smooth'});
+    } else {
+      const errMsg = json.errors ? json.errors.map(e=>e.message).join(', ') : 'Error al enviar.';
+      showToast('❌ '+errMsg);
+      btn.disabled = false; btn.classList.remove('loading');
     }
-  }catch(err){
+  } catch(err) {
     showToast('❌ Sin conexión. Verifica tu internet e intenta de nuevo.');
-    btn.disabled=false;btn.classList.remove('loading');
+    btn.disabled = false; btn.classList.remove('loading');
   }
 };
 </script>
